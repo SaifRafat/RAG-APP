@@ -2,7 +2,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, Distance, PointStruct
 
 class QdrantStorage:
-    def __init__(self, url: str = "http://localhost:6333", collection= "docs", dim = 3072):
+    def __init__(self, url: str = "http://localhost:6333", collection: str = "docs", dim: int = 384):
         self.client = QdrantClient(url=url, timeout=30)
         self.collection = collection
         if not self.client.collection_exists(self.collection):
@@ -37,6 +37,6 @@ class QdrantStorage:
             source = payload.get('source', '')
             if text:
                 context.append(text)
-                sources.app(source)
+                sources.add(source)
 
         return context, sources
